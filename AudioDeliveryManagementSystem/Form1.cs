@@ -39,8 +39,17 @@ namespace AudioDeliveryManagementSystem
             //Loop through all dropped items and display them
             foreach (string file in droppedFiles)
             {
-                userDraggedFiles.Items.Add(Path.GetFullPath(file));
+                if (System.IO.Path.GetExtension(file).Equals(".wav", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    userDraggedFiles.Items.Add(Path.GetFullPath(file));
+                }
+                else
+                {
+                    MessageBox.Show("Only wav files are allowed.");
+                }
+                
             }
+
         }
 
 
