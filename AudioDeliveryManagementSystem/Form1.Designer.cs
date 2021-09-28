@@ -31,6 +31,7 @@ namespace AudioDeliveryManagementSystem
         {
             this.userDraggedFiles = new System.Windows.Forms.ListBox();
             this.submitSelectedFiles = new System.Windows.Forms.Button();
+            this.browseSystemFiles = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // userDraggedFiles
@@ -49,18 +50,30 @@ namespace AudioDeliveryManagementSystem
             // submitSelectedFiles
             // 
             this.submitSelectedFiles.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.submitSelectedFiles.Location = new System.Drawing.Point(12, 382);
+            this.submitSelectedFiles.Location = new System.Drawing.Point(679, 382);
             this.submitSelectedFiles.Name = "submitSelectedFiles";
             this.submitSelectedFiles.Size = new System.Drawing.Size(109, 42);
             this.submitSelectedFiles.TabIndex = 1;
             this.submitSelectedFiles.Text = "Validate";
             this.submitSelectedFiles.UseVisualStyleBackColor = true;
             // 
+            // browseSystemFiles
+            // 
+            this.browseSystemFiles.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.browseSystemFiles.Location = new System.Drawing.Point(13, 383);
+            this.browseSystemFiles.Name = "browseSystemFiles";
+            this.browseSystemFiles.Size = new System.Drawing.Size(87, 26);
+            this.browseSystemFiles.TabIndex = 2;
+            this.browseSystemFiles.Text = "Browse files";
+            this.browseSystemFiles.UseVisualStyleBackColor = true;
+            this.browseSystemFiles.Click += new System.EventHandler(this.browseSystemFiles_Click);
+            // 
             // adms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.browseSystemFiles);
             this.Controls.Add(this.submitSelectedFiles);
             this.Controls.Add(this.userDraggedFiles);
             this.Name = "adms";
@@ -73,6 +86,7 @@ namespace AudioDeliveryManagementSystem
 
         private System.Windows.Forms.ListBox userDraggedFiles;
         private System.Windows.Forms.Button submitSelectedFiles;
+        private System.Windows.Forms.Button browseSystemFiles;
     }
 }
 
