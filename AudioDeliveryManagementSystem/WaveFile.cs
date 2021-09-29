@@ -13,7 +13,9 @@ namespace AudioDeliveryManagementSystem
         public string FilePath { get; set; }
         public string FileName { get; set; }
         public long FileSizeInBytes { get; set; }
+        public long ExpectedFileSizeInBytes { get; set; }
         public long DurationInMillieSecs { get; set; }
+        public bool PassedValidation { get; set; }
         public WaveFile(string filePath)
         {
             Status = WaveFileStatus.Unchecked;
@@ -25,5 +27,7 @@ namespace AudioDeliveryManagementSystem
             TimeSpan duration = reader.TotalTime;
             DurationInMillieSecs = duration.Milliseconds;
         }
+
+
     }
 }

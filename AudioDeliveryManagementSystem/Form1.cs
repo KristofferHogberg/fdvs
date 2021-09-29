@@ -13,6 +13,9 @@ namespace AudioDeliveryManagementSystem
 {
     public partial class adms : Form
     {
+        private List<string> FilePathsToWaveFiles { get; set; }
+        private List<WaveFile> CheckedWaveFiles {get; set;}
+
         public adms()
         {
             InitializeComponent();
@@ -41,6 +44,7 @@ namespace AudioDeliveryManagementSystem
             {
                 if (System.IO.Path.GetExtension(file).Equals(".wav", StringComparison.InvariantCultureIgnoreCase))
                 {
+                    FilePathsToWaveFiles.Add(Path.GetFullPath(file));
                     userDraggedFiles.Items.Add(Path.GetFullPath(file));
                 }
                 else
@@ -60,7 +64,7 @@ namespace AudioDeliveryManagementSystem
                 {
                     if (System.IO.Path.GetExtension(openFileDialog.FileName).Equals(".wav", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        //userDraggedFiles.Items.Add(Path.GetFullPath(file));
+                        FilePathsToWaveFiles.Add(openFileDialog.FileName);
                         userDraggedFiles.Items.Add(openFileDialog.FileName);
                     }
                     else
@@ -73,7 +77,21 @@ namespace AudioDeliveryManagementSystem
                 {
                 }
             }
+        }
+
+        private void submitSelectedFiles_Click(object sender, EventArgs e)
+        {
+            //Work here, delete listaMedStrangar
+            var waveFileIntegrityValidator = new WaveFileIntegrityValidator(FilePathsToWaveFiles, (int)BitDepth.BD32, (int)SampleRate.SR48000);
+        }
+
+        //TEST
+        private void ValidationLogBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
             
+            var myItems = new List<string> { "aaa", "bbb" };
+            ValidationLogBox.DataSource = myItems;
+            ValidationLogBox.Update();
         }
     }
 }
