@@ -21,7 +21,6 @@ namespace AudioDeliveryManagementSystem
             FilePath = filePath;
             FileName = file.Name;
             FileSizeInBytes = file.Length;
-
             WaveFileReader reader = new WaveFileReader(filePath);
             TimeSpan duration = reader.TotalTime;
             DurationInMillieSecs = duration.Milliseconds;

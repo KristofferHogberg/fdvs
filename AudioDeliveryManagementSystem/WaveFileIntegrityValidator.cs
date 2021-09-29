@@ -8,24 +8,29 @@ namespace AudioDeliveryManagementSystem
 {
     class WaveFileIntegrityValidator
     {
-        string[] WaveFilePaths { get; set; }
         int ExpectedBitDepth { get; set; }
         int ExpectedSampleRate { get; set; }
 
+        List<string> UncheckedWaveFiles { get; set; }
         List<string> ApprovedWaveFiles { get; set; }
         List<string> UnApprovedWaveFiles { get; set; }
-        List<string> ErrorLogForUnApprovedWaveFiles { get; set; }
+        List<string> ErrorLogForUnapprovedWaveFiles { get; set; }
 
-        WaveFileIntegrityValidator(string[] waveFilePaths, int expectedBitDepth, int expectedSampleRate)
+        WaveFileIntegrityValidator(List<string> waveFilePaths, int expectedBitDepth, int expectedSampleRate)
         {
-            WaveFilePaths = waveFilePaths;
+            UncheckedWaveFiles = waveFilePaths;
             ExpectedBitDepth = expectedBitDepth;
             ExpectedSampleRate = expectedSampleRate;
         }
 
-        public long CalculateExpectedFileSize(int bitDepth, int sampleRate, long durationInMillieSecs, int channels = 1)
+        public decimal CalculateExpectedFileSize(int bitDepth, int sampleRate, decimal durationInMillieSecs, int channels = 1)
         {
-            return sampleRate * (bitDepth / 8) * (durationInMillieSecs * 1000 * channels);
+            return sampleRate * (bitDepth / 8) * (durationInMillieSecs / 1000) * channels;
+        }
+
+        public void ValidateWaveFileLength()
+        {
+
         }
     }
 }

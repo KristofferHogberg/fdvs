@@ -45,26 +45,29 @@ namespace AudioDeliveryManagementSystem
                 }
                 else
                 {
-                    MessageBox.Show("Only wav files are allowed.");
+                    MessageBox.Show("Only .wav files are supported.");
                 }
-                
             }
-
         }
-
 
         private void browseSystemFiles_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
+            DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                string file = openFileDialog.FileName;
                 try
                 {
-                    string text = File.ReadAllText(file);
-
-                    userDraggedFiles.Items.Add(file);
+                    if (System.IO.Path.GetExtension(openFileDialog.FileName).Equals(".wav", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        //userDraggedFiles.Items.Add(Path.GetFullPath(file));
+                        userDraggedFiles.Items.Add(openFileDialog.FileName);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Only .wav files are supported.");
+                    }
+                    
                 }
                 catch (IOException)
                 {
