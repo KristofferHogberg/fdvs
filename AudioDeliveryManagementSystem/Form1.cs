@@ -18,6 +18,8 @@ namespace AudioDeliveryManagementSystem
 
         public adms()
         {
+            FilePathsToWaveFiles = new List<string>();
+            CheckedWaveFiles = new List<WaveFile>();
             InitializeComponent();
         }
 
@@ -81,17 +83,23 @@ namespace AudioDeliveryManagementSystem
 
         private void submitSelectedFiles_Click(object sender, EventArgs e)
         {
-            //Work here, delete listaMedStrangar
             var waveFileIntegrityValidator = new WaveFileIntegrityValidator(FilePathsToWaveFiles, (int)BitDepth.BD32, (int)SampleRate.SR48000);
+            CheckedWaveFiles = waveFileIntegrityValidator.WaveFiles;
+
+            var errorLogs = new List<string>();
+            foreach (var waveFile in CheckedWaveFiles)
+            {
+                errorLogs.Add($"{waveFile.FileName}: Size is {(int)waveFile.FileSizeInBytes}, expected is {(int)waveFile.ExpectedFileSizeInBytes}");
+            }
+            ValidationLogBox.DataSource = errorLogs;
+            ValidationLogBox.Refresh();
         }
 
         //TEST
         private void ValidationLogBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-            var myItems = new List<string> { "aaa", "bbb" };
-            ValidationLogBox.DataSource = myItems;
-            ValidationLogBox.Update();
+            
         }
     }
 }

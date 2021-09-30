@@ -39,7 +39,7 @@ namespace AudioDeliveryManagementSystem
         {
             foreach (var waveFile in WaveFiles)
             {
-                waveFile.ExpectedFileSizeInBytes = (long)CalcExpectedUncompressedWaveFileSize((int)ExpectedBitDepth, (int)ExpectedSampleRate, waveFile.DurationInMillieSecs);
+                waveFile.ExpectedFileSizeInBytes = CalcExpectedUncompressedWaveFileSize((int)ExpectedBitDepth, (int)ExpectedSampleRate, waveFile.DurationInMillieSecs);
             }
         }
         private void ValidateFiles()
@@ -51,7 +51,7 @@ namespace AudioDeliveryManagementSystem
             }
         }
         //Enbart kompatibel med mono-filer.
-        private long CalcExpectedUncompressedWaveFileSize(int bitDepth, int sampleRate, long durationInMillieSecs, int channels = 1)
+        private decimal CalcExpectedUncompressedWaveFileSize(int bitDepth, int sampleRate, decimal durationInMillieSecs, int channels = 1)
         {
             return sampleRate * (bitDepth / 8) * (durationInMillieSecs / 1000) * channels;
         }
