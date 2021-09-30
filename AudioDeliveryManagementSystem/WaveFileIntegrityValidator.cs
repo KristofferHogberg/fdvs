@@ -8,24 +8,59 @@ namespace AudioDeliveryManagementSystem
 {
     class WaveFileIntegrityValidator
     {
-        string[] WaveFilePaths { get; set; }
-        int ExpectedBitDepth { get; set; }
-        int ExpectedSampleRate { get; set; }
+        public BitDepth ExpectedBitDepth { get; private set; }
+        public SampleRate ExpectedSampleRate { get; private set; }
+        public List<WaveFile> WaveFiles { get; private set; }
 
-        List<string> ApprovedWaveFiles { get; set; }
-        List<string> UnApprovedWaveFiles { get; set; }
-        List<string> ErrorLogForUnApprovedWaveFiles { get; set; }
-
-        WaveFileIntegrityValidator(string[] waveFilePaths, int expectedBitDepth, int expectedSampleRate)
+        public WaveFileIntegrityValidator(List<string> waveFilePaths, int expectedBitDepth, int expectedSampleRate)
         {
-            WaveFilePaths = waveFilePaths;
-            ExpectedBitDepth = expectedBitDepth;
-            ExpectedSampleRate = expectedSampleRate;
+            ExpectedBitDepth = (BitDepth)expectedBitDepth;
+            ExpectedSampleRate = (SampleRate)expectedSampleRate;
+            WaveFiles = new List<WaveFile>();
+            foreach (var filePath in waveFilePaths)
+            {
+                try
+                {
+                    WaveFiles.Add(new WaveFile(filePath));
+                }
+                catch (NullReferenceException)
+                {
+                }
+                
+            }
+
+            AssignExpectedFileSizesToWaveFiles();
+            ValidateFiles();
         }
 
-        public long CalculateExpectedFileSize(int bitDepth, int sampleRate, long durationInMillieSecs, int channels = 1)
+
+
+        private void AssignExpectedFileSizesToWaveFiles()
         {
-            return sampleRate * (bitDepth / 8) * (durationInMillieSecs * 1000 * channels);
+            foreach (var waveFile in WaveFiles)
+            {
+                waveFile.ExpectedFileSizeInBytes = CalcExpectedUncompressedWaveFileSize((int)ExpectedBitDepth, (int)ExpectedSampleRate, waveFile.DurationInMillieSecs);
+            }
+        }
+        private void ValidateFiles()
+        {
+            foreach (var waveFile in WaveFiles)
+            {
+
+                waveFile.PassedValidation = CheckIfLengthAndExpectedLengthMatch(waveFile);
+            }
+        }
+        //Enbart kompatibel med mono-filer.
+        private decimal CalcExpectedUncompressedWaveFileSize(int bitDepth, int sampleRate, decimal durationInMillieSecs, int channels = 1)
+        {
+            return sampleRate * (bitDepth / 8) * (durationInMillieSecs / 1000) * channels;
+        }
+        private bool CheckIfLengthAndExpectedLengthMatch(WaveFile waveFile)
+        {
+            if (waveFile.FileSizeInBytes == waveFile.ExpectedFileSizeInBytes)
+                return true;
+            else
+                return false;
         }
     }
 }
