@@ -16,3 +16,8 @@ The purpose of the software is to validate the content of a folder meant for del
 **Example of output data after running program (program output):**
 
 ![Concept Output](https://github.com/RasmusBroborg/fdvs/blob/main/Assets/ReadMe/OutputValuesExample.png)
+
+In the above example the program detected all files except the expected files for the Finnish deliverables, 
+which in this case were incorrectly named with double file extensions at the end of their filename. 
+In a delivery scenario the error would be easily detectable and fixed before the delivery is sent to the
+client.
