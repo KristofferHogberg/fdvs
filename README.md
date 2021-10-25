@@ -11,8 +11,8 @@ The purpose of the software is to validate the content of a folder meant for del
 
 **Example Input:**
 
-![Concept Input](https://github.com/RasmusBroborg/fdvs/blob/RasmusBroborg-ReadMePatch/Assets/ReadMe/Concept_InputData.png)
+![Concept Input](https://github.com/RasmusBroborg/fdvs/tree/main/Assets/ReadMe)
 
 **Example Output:**
 
-![Concept Output](https://github.com/RasmusBroborg/fdvs/blob/RasmusBroborg-ReadMePatch/Assets/ReadMe/Concept_OutputData.png)
+![Concept Output](https://github.com/RasmusBroborg/fdvs/blob/main/Assets/ReadMe/Concept_OutputData.png)
