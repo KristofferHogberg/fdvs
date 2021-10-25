@@ -9,10 +9,10 @@ The purpose of the software is to validate the content of a folder meant for del
 - Step 3: Validate that the expected files requested by the item list exists within the folder structure.
 - Step 4: Export a pdf or excel sheet containing the delivery specifications.
 
-**Example Input:**
+**Example of item list deliverables (program input):**
 
-![Concept Input](https://github.com/RasmusBroborg/fdvs/blob/main/Assets/ReadMe/Concept_InputData.png)
+![Concept Input](https://github.com/RasmusBroborg/fdvs/blob/main/Assets/ReadMe/InputValuesExample.png)
 
-**Example Output:**
+**Example of output data after running program (program output):**
 
-![Concept Output](https://github.com/RasmusBroborg/fdvs/blob/main/Assets/ReadMe/Concept_OutputData.png)
+![Concept Output](https://github.com/RasmusBroborg/fdvs/blob/main/Assets/ReadMe/OutputValuesExample.png)
