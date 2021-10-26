@@ -11,11 +11,15 @@ namespace fdvs
     public class DeliveryDirectoryModel
     {
         public string DirectoryPath { get; set; }
+        //TODO - Fix the Directory name
+        public string DirectoryName { get; set; }
         public List<FileInfo> AllFilesInDeliveryFolder { get; } = new List<FileInfo>();
 
         public DeliveryDirectoryModel(string directoryPath)
         {
             DirectoryPath = directoryPath;
+            var dirInfo = new DirectoryInfo(directoryPath);
+            DirectoryName = dirInfo.Name;
             AllFilesInDeliveryFolder = GetAllFileInfoFromDirectoryTree(DirectoryPath);
         }
 
