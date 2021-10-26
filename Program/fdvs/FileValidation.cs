@@ -37,7 +37,6 @@ namespace fdvs
             //TODO - Fix so that the filepaths stop at the main folder,
             //so that C: is not incl.
             var output = new List<string>();
-            Console.WriteLine(deliveryDirectory.DirectoryPath);
             foreach (var file in deliveryDirectory.AllFilesInDeliveryFolder)
             {
                 output.Add(file.FullName.Substring(
