@@ -10,7 +10,7 @@ namespace fdvs
     static class FileParser
     {
         /// <summary>
-        /// Reads a single column csv and adds the strings to a list.
+        /// Reads a single column csv and returns a list of strings.
         /// </summary>
         /// <param name="filePath">Filepath to the .csv file.</param>
         /// <returns></returns>
