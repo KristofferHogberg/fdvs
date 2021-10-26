@@ -10,8 +10,8 @@ namespace fdvs
     /// </summary>
     public class DeliveryDirectoryModel
     {
-        public string DirectoryPath;
-        public List<FileInfo> AllFilesInDeliveryFolder { get; set; } = new List<FileInfo>();
+        public string DirectoryPath { get; set; }
+        public List<FileInfo> AllFilesInDeliveryFolder { get; } = new List<FileInfo>();
 
         public DeliveryDirectoryModel(string directoryPath)
         {

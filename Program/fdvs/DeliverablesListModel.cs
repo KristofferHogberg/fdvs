@@ -27,8 +27,5 @@ namespace fdvs
         {
             FileNameList = FileParser.CsvParser(filePath);
         }
-
-        
-        
     }
 }
