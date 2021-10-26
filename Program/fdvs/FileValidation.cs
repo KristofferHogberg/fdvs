@@ -64,11 +64,8 @@ namespace fdvs
             //här i också, genom fileInfo.FullName
             //Nog smartare att inte omvandla till string utan behålla
             //fileinfo.
-            var allFilesInDeliveryDirectory = new List<string>();
-            foreach (var fileInfo in deliveryDirectory.AllFilesInDeliveryFolder)
-            {
-                allFilesInDeliveryDirectory.Add(fileInfo.Name);
-            }
+
+            var allFilesInDeliveryDirectory = GetAllFileNamesInDeliveryFolder(deliveryDirectory);
 
             var filesNotInDeliverables = new List<string>();
             foreach (var filename in allFilesInDeliveryDirectory)
