@@ -10,7 +10,6 @@ namespace ConsoleLogicTesting
         static void Main(string[] args)
         {
             //Getting project directory path to access test data
-            //string baseDirectoryPathOfAssembly = Directory.GetCurrentDirectory();
             string projectDirectoryPath = 
                 Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().Length - 44);
             string testCsvFilePath = projectDirectoryPath + @"Assets\TestInputData\TestCsvItemListInput.csv";
@@ -21,17 +20,13 @@ namespace ConsoleLogicTesting
 
             List<string> csvImport = filevalidation.Deliverables.FileNameList;
 
-            List<string> allFilenames = filevalidation.GetAllFileNamesInDeliveryFolder(
-                filevalidation.DeliveryDirectory);
+            List<string> allFilenames = filevalidation.DeliveryDirectory.AllFileNamesInDirectory;
 
-            List<string> allFilePaths = filevalidation.GetAllFilePathsInDeliveryFolder(
-                filevalidation.DeliveryDirectory);
+            List<string> allFilePaths = filevalidation.DeliveryDirectory.AllFilePathsInDirectory;
 
-            List<string> extraFilenames = filevalidation.GetAllExtraFileNamesNotIncludedInDelivery(
-                filevalidation.Deliverables.FileNameList, filevalidation.DeliveryDirectory);
+            List<string> extraFilenames = filevalidation.AllExtraFileNamesInDirectory;
 
-            List<string> missingFileNames = filevalidation.GetAllMissingFileNames(
-                filevalidation.Deliverables.FileNameList, filevalidation.DeliveryDirectory);
+            List<string> missingFileNames = filevalidation.AllMissingFileNames;
 
             //Listing all values:
 
@@ -64,6 +59,9 @@ namespace ConsoleLogicTesting
             {
                 Console.WriteLine("    -" + fileName);
             }
+
+            //Console.WriteLine("\nTesting export of csv:");
+            //DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\TestCsvExport.csv");
         }
     }
 }

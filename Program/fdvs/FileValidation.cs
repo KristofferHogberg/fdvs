@@ -13,52 +13,36 @@ namespace fdvs
     {
         public DeliverablesListModel Deliverables { get; set; }
         public DeliveryDirectoryModel DeliveryDirectory { get; set; }
+        public List<string> AllExtraFileNamesInDirectory { get; set; } = new List<string>();
+        public List<string> AllMissingFileNames { get; set; } = new List<string>();
+
+
 
         public FileValidation(string filePathToCsv, 
             string filePathToDeliveryDirectory)
         {
             Deliverables = new DeliverablesListModel(filePathToCsv);
             DeliveryDirectory = new DeliveryDirectoryModel(filePathToDeliveryDirectory);
+            AllExtraFileNamesInDirectory = GetAllExtraFileNamesNotIncludedInDelivery(
+                Deliverables.FileNameList, DeliveryDirectory);
+            AllMissingFileNames = GetAllMissingFileNames(
+                Deliverables.FileNameList, DeliveryDirectory);
         }
-
-        public List<string> GetAllFileNamesInDeliveryFolder(
-            DeliveryDirectoryModel deliveryDirectory)
-        {
-            var output = new List<string>();
-            foreach (var file in deliveryDirectory.AllFilesInDeliveryFolder)
-            {
-                output.Add(file.Name);
-            }
-            return output;
-        }
-        public List<string> GetAllFilePathsInDeliveryFolder(
-            DeliveryDirectoryModel deliveryDirectory)
-        {
-            //TODO - Fix so that the filepaths stop at the main folder,
-            //so that C: is not incl.
-            var output = new List<string>();
-            foreach (var file in deliveryDirectory.AllFilesInDeliveryFolder)
-            {
-                output.Add(file.FullName.Substring(
-                    file.FullName.IndexOf(deliveryDirectory.DirectoryName)));
-            }
-            return output;
-        }
-        public List<string> GetAllMissingFileNames(List<string> deliverables, 
+        private List<string> GetAllMissingFileNames(List<string> deliverables, 
             DeliveryDirectoryModel deliveryDirectory)
         {
             var output = new List<string>();
 
             foreach (var filename in deliverables)
             {
-                if (!GetAllFileNamesInDeliveryFolder(deliveryDirectory).Contains(filename))
+                if (!deliveryDirectory.AllFileNamesInDirectory.Contains(filename))
                 {
                     output.Add(filename);
                 }
             }
             return output;
         }
-        public List<string> GetAllExtraFileNamesNotIncludedInDelivery(
+        private List<string> GetAllExtraFileNamesNotIncludedInDelivery(
             List<string> deliverables, DeliveryDirectoryModel deliveryDirectory)
         {
             //TODO - Kan nog bygga in att den ska visa filepath
@@ -66,10 +50,8 @@ namespace fdvs
             //Nog smartare att inte omvandla till string utan behålla
             //fileinfo.
 
-            var allFilesInDeliveryDirectory = GetAllFileNamesInDeliveryFolder(deliveryDirectory);
-
             var filesNotInDeliverables = new List<string>();
-            foreach (var filename in allFilesInDeliveryDirectory)
+            foreach (var filename in deliveryDirectory.AllFileNamesInDirectory)
             {
                 if (!deliverables.Contains(filename))
                 {
