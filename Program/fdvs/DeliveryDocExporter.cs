@@ -10,50 +10,37 @@ namespace fdvs
 {
     public static class DeliveryDocExporter
     {
+        //TODO - Create support for column "Files not mentioned in provided list of deliverables:"
+        //Needs to alter methods for GenerateCsvStringOfRows() (currently takes one overload)
         private static string GenerateCsvString(FileValidation fileValidation)
         {
             //Needs to manually add columns below. NOT SCALEABLE.
-            string columns1 = "File name,File path";
-            string csvFormat1 = GenerateCsvStringOfRows(
-                fileValidation.DeliveryDirectory.AllFileNamesInDirectory,
-                fileValidation.DeliveryDirectory.AllFilePathsInDirectory,
-                columns1);
+            string columns = "All files:,File paths:,Files not mentioned in provided list of deliverables:";
+            string csvFormat = GenerateCsvStringOfRows(
+                fileValidation.DeliveryDirectory.DeliveryFiles,
+                columns);
 
-            throw new NotImplementedException();
-            //TODO finish this code
-            string columns2 = "Extra files (not included in list of requested deliverables)";
-            //string csvFormat2 = GenerateCsvStringOfRows(fileValidation.)
-            //return csvFormat;
+            return csvFormat;
         }
 
-        private static string GenerateCsvStringOfRows(List<string> filePaths, string columns)
-        {
-            List<string> rowsList = new List<string>() { };
-            rowsList.Add(columns);
-            for (int index = 0; index < filePaths.Count; index++)
-            {
-                rowsList.Add($"{filePaths[index]}");
-            }
-            return string.Join("\n", rowsList);
-        }
-        private static string GenerateCsvStringOfRows(List<string> fileNames, List<string> filePaths, string columns)
+        private static string GenerateCsvStringOfRows(List<DeliveryFile> files, string columns)
         {
             List<string> rowsList = new List<string>() {};
             rowsList.Add(columns);
-            for (int index = 0; index < fileNames.Count; index++)
+            for (int index = 0; index < files.Count; index++)
             {
-                rowsList.Add($"{fileNames[index]},{filePaths[index]}");
+                rowsList.Add($"{files[index].FileName},{files[index].FilePath}");
             }
             return string.Join("\n",rowsList);
         }
 
 
-        //TODO - Create .csv exporter
+        //TODO - Create .csv exporter that actually creates a csv, instead of altering an existing one.
 
         public static void ExportCsv(FileValidation fileValidation, string filePath)
         {
             var csvString = GenerateCsvString(fileValidation);
-            File.WriteAllText(filePath, csvString, Encoding.ASCII);
+            File.WriteAllText(filePath, csvString, Encoding.UTF8);
         }
 
         //TODO - Create .xlsx exporter

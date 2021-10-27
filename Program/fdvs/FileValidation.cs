@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,50 +17,49 @@ namespace fdvs
         public List<string> AllExtraFileNamesInDirectory { get; set; } = new List<string>();
         public List<string> AllMissingFileNames { get; set; } = new List<string>();
 
-
-
         public FileValidation(string filePathToCsv, 
             string filePathToDeliveryDirectory)
         {
             Deliverables = new DeliverablesListModel(filePathToCsv);
             DeliveryDirectory = new DeliveryDirectoryModel(filePathToDeliveryDirectory);
-            AllExtraFileNamesInDirectory = GetAllExtraFileNamesNotIncludedInDelivery(
-                Deliverables.FileNameList, DeliveryDirectory);
-            AllMissingFileNames = GetAllMissingFileNames(
-                Deliverables.FileNameList, DeliveryDirectory);
+            UpdateIfFilesInDeliveryFolderIsInDeliverables(Deliverables.FileNameList, DeliveryDirectory.DeliveryFiles);
         }
-        private List<string> GetAllMissingFileNames(List<string> deliverables, 
-            DeliveryDirectoryModel deliveryDirectory)
-        {
-            var output = new List<string>();
 
-            foreach (var filename in deliverables)
+
+        public List<string> GetAllMissingFileNames()
+        {
+            var filesInDeliveryDirectories = DeliveryDirectory.DeliveryFiles.Select(x => x.FileName).ToList();
+            var missingFiles = Deliverables.FileNameList.Where(x => !filesInDeliveryDirectories.Contains(x)).Select(x => x).ToList();
+            return missingFiles;
+
+            //var output = new List<string>();
+            //var filenamesInDeliveryDirectory = 
+            //    deliveryFiles.Select(x => x.FileName).ToList();
+
+            //foreach (var filename in deliverables)
+            //{
+            //    if (!filenamesInDeliveryDirectory.Contains(filename))
+            //    {
+            //        output.Add(filename);
+            //    }
+            //}
+            //return output;
+        }
+
+        private void UpdateIfFilesInDeliveryFolderIsInDeliverables(
+            List<string> deliverables, List<DeliveryFile> deliveryFiles)
+        {
+            foreach (var file in deliveryFiles)
             {
-                if (!deliveryDirectory.AllFileNamesInDirectory.Contains(filename))
+                if (deliverables.Contains(file.FileName))
                 {
-                    output.Add(filename);
+                    file.InDeliverables = true;
+                }
+                else
+                {
+                    file.InDeliverables = false;
                 }
             }
-            return output;
-        }
-        private List<string> GetAllExtraFileNamesNotIncludedInDelivery(
-            List<string> deliverables, DeliveryDirectoryModel deliveryDirectory)
-        {
-            //TODO - Kan nog bygga in att den ska visa filepath
-            //här i också, genom fileInfo.FullName
-            //Nog smartare att inte omvandla till string utan behålla
-            //fileinfo.
-
-            var filesNotInDeliverables = new List<string>();
-            foreach (var filename in deliveryDirectory.AllFileNamesInDirectory)
-            {
-                if (!deliverables.Contains(filename))
-                {
-                    filesNotInDeliverables.Add(filename);
-                }
-            }
-
-            return filesNotInDeliverables;
         }
     }
 }

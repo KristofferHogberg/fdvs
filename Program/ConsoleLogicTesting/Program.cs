@@ -20,13 +20,13 @@ namespace ConsoleLogicTesting
 
             List<string> csvImport = filevalidation.Deliverables.FileNameList;
 
-            List<string> allFilenames = filevalidation.DeliveryDirectory.AllFileNamesInDirectory;
+            List<string> allFilenames = filevalidation.DeliveryDirectory.GetAllFileNames();
 
-            List<string> allFilePaths = filevalidation.DeliveryDirectory.AllFilePathsInDirectory;
+            List<string> allFilePaths = filevalidation.DeliveryDirectory.GetAllFilePaths();
 
-            List<string> extraFilenames = filevalidation.AllExtraFileNamesInDirectory;
+            List<string> extraFilenames = filevalidation.DeliveryDirectory.GetAllFilesNotInDeliverables();
 
-            List<string> missingFileNames = filevalidation.AllMissingFileNames;
+            List<string> missingFileNames = filevalidation.GetAllMissingFileNames();
 
             //Listing all values:
 
@@ -60,8 +60,9 @@ namespace ConsoleLogicTesting
                 Console.WriteLine("    -" + fileName);
             }
 
-            //Console.WriteLine("\nTesting export of csv:");
-            //DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\TestCsvExport.csv");
+            Console.WriteLine("\nTesting edit of csv:");
+            DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\TestCsvExport.csv");
+            Console.WriteLine("Csv edited.");
         }
     }
 }
