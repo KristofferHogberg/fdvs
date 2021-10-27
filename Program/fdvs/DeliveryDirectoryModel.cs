@@ -65,29 +65,5 @@ namespace fdvs
         {
             return DeliveryFiles.Select(x => x.FileSize).ToList();
         }
-
-        //public List<string> GetAllFileNamesInDeliveryFolder(
-        //    List<FileInfo> allFilesInDeliveryFolder)
-        //{
-        //    var output = new List<string>();
-        //    foreach (var file in allFilesInDeliveryFolder)
-        //    {
-        //        output.Add(file.Name);
-        //    }
-        //    return output;
-        //}
-
-        //public List<string> GetAllFilePathsInDeliveryFolder(
-        //    List<FileInfo> allFilesInDeliveryFolder, string directoryName)
-        //{
-        //    var output = new List<string>();
-        //    foreach (var file in allFilesInDeliveryFolder)
-        //    {
-        //        output.Add(file.FullName.Substring(
-        //            file.FullName.IndexOf(directoryName)));
-        //    }
-        //    return output;
-        //}
-
     }
 }

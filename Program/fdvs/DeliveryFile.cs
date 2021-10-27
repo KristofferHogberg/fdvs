@@ -12,7 +12,6 @@ namespace fdvs
         public string FileName { get; }
         public string FilePath { get; }
         public long FileSize { get; }
-        //TODO - Kan man använda ref för att bestämma ifall en DeliveryFile är med i en leverans eller ej i ett senare skede?
         public bool InDeliverables { get; set; }
         public DeliveryFile(FileInfo fileInfo, string deliveryDirectoryName)
         {

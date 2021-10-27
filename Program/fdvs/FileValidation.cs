@@ -31,19 +31,6 @@ namespace fdvs
             var filesInDeliveryDirectories = DeliveryDirectory.DeliveryFiles.Select(x => x.FileName).ToList();
             var missingFiles = Deliverables.FileNameList.Where(x => !filesInDeliveryDirectories.Contains(x)).Select(x => x).ToList();
             return missingFiles;
-
-            //var output = new List<string>();
-            //var filenamesInDeliveryDirectory = 
-            //    deliveryFiles.Select(x => x.FileName).ToList();
-
-            //foreach (var filename in deliverables)
-            //{
-            //    if (!filenamesInDeliveryDirectory.Contains(filename))
-            //    {
-            //        output.Add(filename);
-            //    }
-            //}
-            //return output;
         }
 
         private void UpdateIfFilesInDeliveryFolderIsInDeliverables(
