@@ -23,7 +23,8 @@ namespace fdvs
             DeliveryFiles = GenerateDeliveryFilesObjects(AllFilesInDeliveryFolder);
         }
 
-        private List<DeliveryFile> GenerateDeliveryFilesObjects(List<FileInfo> allFilesInDeliveryFolder)
+        private List<DeliveryFile> GenerateDeliveryFilesObjects(
+            List<FileInfo> allFilesInDeliveryFolder)
         {
             var output = new List<DeliveryFile>();
 
@@ -36,7 +37,8 @@ namespace fdvs
 
         private List<FileInfo> GetAllFileInfoFromDirectoryTree(string directoryPath)
         {
-            var filePaths = Directory.GetFiles(directoryPath, "*.*", SearchOption.AllDirectories).ToList();
+            var filePaths = Directory.GetFiles(
+                directoryPath, "*.*", SearchOption.AllDirectories).ToList();
 
             var output = new List<FileInfo>();
             foreach (var path in filePaths)
