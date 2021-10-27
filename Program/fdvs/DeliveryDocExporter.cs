@@ -25,6 +25,8 @@ namespace fdvs
 
         private static string GenerateCsvStringOfRows(List<DeliveryFile> files, string columns)
         {
+            //TODO - Generate Rows() should be a private method?
+            //Looping through all files and filepaths and adding them together.
             List<string> rowsList = new List<string>() {};
             rowsList.Add(columns);
             for (int index = 0; index < files.Count; index++)
