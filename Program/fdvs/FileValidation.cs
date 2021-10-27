@@ -20,30 +20,6 @@ namespace fdvs
             Deliverables = new DeliverablesListModel(filePathToCsv);
             DeliveryDirectory = new DeliveryDirectoryModel(filePathToDeliveryDirectory);
         }
-
-        public List<string> GetAllFileNamesInDeliveryFolder(
-            DeliveryDirectoryModel deliveryDirectory)
-        {
-            var output = new List<string>();
-            foreach (var file in deliveryDirectory.AllFilesInDeliveryFolder)
-            {
-                output.Add(file.Name);
-            }
-            return output;
-        }
-        public List<string> GetAllFilePathsInDeliveryFolder(
-            DeliveryDirectoryModel deliveryDirectory)
-        {
-            //TODO - Fix so that the filepaths stop at the main folder,
-            //so that C: is not incl.
-            var output = new List<string>();
-            foreach (var file in deliveryDirectory.AllFilesInDeliveryFolder)
-            {
-                output.Add(file.FullName.Substring(
-                    file.FullName.IndexOf(deliveryDirectory.DirectoryName)));
-            }
-            return output;
-        }
         public List<string> GetAllMissingFileNames(List<string> deliverables, 
             DeliveryDirectoryModel deliveryDirectory)
         {
@@ -51,7 +27,7 @@ namespace fdvs
 
             foreach (var filename in deliverables)
             {
-                if (!GetAllFileNamesInDeliveryFolder(deliveryDirectory).Contains(filename))
+                if (!deliveryDirectory.AllFileNamesInDirectory.Contains(filename))
                 {
                     output.Add(filename);
                 }
@@ -66,10 +42,8 @@ namespace fdvs
             //Nog smartare att inte omvandla till string utan behålla
             //fileinfo.
 
-            var allFilesInDeliveryDirectory = GetAllFileNamesInDeliveryFolder(deliveryDirectory);
-
             var filesNotInDeliverables = new List<string>();
-            foreach (var filename in allFilesInDeliveryDirectory)
+            foreach (var filename in deliveryDirectory.AllFileNamesInDirectory)
             {
                 if (!deliverables.Contains(filename))
                 {
