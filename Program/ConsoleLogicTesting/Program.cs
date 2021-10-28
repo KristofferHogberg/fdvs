@@ -63,6 +63,9 @@ namespace ConsoleLogicTesting
             Console.WriteLine("\nTesting edit of csv:");
             DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\TestCsvExport.csv");
             Console.WriteLine("Csv edited.");
+
+            Console.WriteLine("\nTesting XML export:");
+            DeliveryDocExporter.ExportXML(filevalidation, $@"{projectDirectoryPath}Exports\TestXmlExport.xml");
         }
     }
 }

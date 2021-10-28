@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <!--Expected files that were missing.-->
+  <MissingFiles>
+    <File>
+<file_name>file6.txt</file_name>
+</File>
+  </MissingFiles>
+  <!--
+Extra files that were not expected.
+-->
+  <ExtraFiles />
+  <!--
+Matching files.
+-->
+  <MatchingFiles>
+    <File>
+<file_Name>file6_incorrectlyNamed.txt</file_Name>
+<file_Path>TestDeliveryFolder\file6_incorrectlyNamed.txt</file_Path>
+</File>
+    <File>
+<file_Name>file1.txt</file_Name>
+<file_Path>TestDeliveryFolder\FolderContainingFiles1-3\file1.txt</file_Path>
+</File>
+    <File>
+<file_Name>file2.txt</file_Name>
+<file_Path>TestDeliveryFolder\FolderContainingFiles1-3\file2.txt</file_Path>
+</File>
+    <File>
+<file_Name>file3.txt</file_Name>
+<file_Path>TestDeliveryFolder\FolderContainingFiles1-3\file3.txt</file_Path>
+</File>
+    <File>
+<file_Name>file4.txt</file_Name>
+<file_Path>TestDeliveryFolder\FolderContainingFiles4-5\file4.txt</file_Path>
+</File>
+    <File>
+<file_Name>file5.txt</file_Name>
+<file_Path>TestDeliveryFolder\FolderContainingFiles4-5\file5.txt</file_Path>
+</File>
+  </MatchingFiles>
+</Root>
