@@ -12,23 +12,33 @@ namespace fdvs
     {
         public string DirectoryPath { get; set; }
         public string DirectoryName { get; set; }
-        public List<FileInfo> AllFilesInDeliveryFolder { get; } = new List<FileInfo>();
-        public List<string> AllFileNamesInDirectory { get; set; } = new List<string>();
-        public List<string> AllFilePathsInDirectory { get; set; } = new List<string>();
+        private List<FileInfo> AllFilesInDeliveryFolder { get; } = new List<FileInfo>();
+        public List<DeliveryFile> DeliveryFiles { get; set; } = new List<DeliveryFile>();
 
         public DeliveryDirectoryModel(string directoryPath)
         {
             DirectoryPath = directoryPath;
             DirectoryName = new DirectoryInfo(directoryPath).Name;
             AllFilesInDeliveryFolder = GetAllFileInfoFromDirectoryTree(DirectoryPath);
-            AllFileNamesInDirectory = GetAllFileNamesInDeliveryFolder(AllFilesInDeliveryFolder);
-            AllFilePathsInDirectory = GetAllFilePathsInDeliveryFolder(
-                AllFilesInDeliveryFolder, DirectoryName);
+            DeliveryFiles = GenerateDeliveryFilesObjects(AllFilesInDeliveryFolder);
+        }
+
+        private List<DeliveryFile> GenerateDeliveryFilesObjects(
+            List<FileInfo> allFilesInDeliveryFolder)
+        {
+            var output = new List<DeliveryFile>();
+
+            foreach (var file in allFilesInDeliveryFolder)
+            {
+                output.Add(new DeliveryFile(file, DirectoryName));
+            }
+            return output;
         }
 
         private List<FileInfo> GetAllFileInfoFromDirectoryTree(string directoryPath)
         {
-            var filePaths = Directory.GetFiles(directoryPath, "*.*", SearchOption.AllDirectories).ToList();
+            var filePaths = Directory.GetFiles(
+                directoryPath, "*.*", SearchOption.AllDirectories).ToList();
 
             var output = new List<FileInfo>();
             foreach (var path in filePaths)
@@ -38,28 +48,24 @@ namespace fdvs
             return output;
         }
 
-        public List<string> GetAllFileNamesInDeliveryFolder(
-            List<FileInfo> allFilesInDeliveryFolder)
+        public List<string> GetAllFileNames()
         {
-            var output = new List<string>();
-            foreach (var file in allFilesInDeliveryFolder)
-            {
-                output.Add(file.Name);
-            }
-            return output;
+            return DeliveryFiles.Select(x => x.FileName).ToList();
         }
 
-        public List<string> GetAllFilePathsInDeliveryFolder(
-            List<FileInfo> allFilesInDeliveryFolder, string directoryName)
+        public List<string> GetAllFilePaths()
         {
-            var output = new List<string>();
-            foreach (var file in allFilesInDeliveryFolder)
-            {
-                output.Add(file.FullName.Substring(
-                    file.FullName.IndexOf(directoryName)));
-            }
-            return output;
+            return DeliveryFiles.Select(x => x.FilePath).ToList();
         }
 
+        public List<string> GetAllFilesNotInDeliverables()
+        {
+            return DeliveryFiles.Where(x => x.InDeliverables == false).Select(x=>x.FileName).ToList();
+        }
+
+        public List<long> GetAllFileSizes()
+        {
+            return DeliveryFiles.Select(x => x.FileSize).ToList();
+        }
     }
 }

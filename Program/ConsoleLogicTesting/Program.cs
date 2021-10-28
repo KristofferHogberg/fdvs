@@ -13,7 +13,6 @@ namespace ConsoleLogicTesting
             string projectDirectoryPath = 
                 Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().Length - 44);
             string testCsvFilePath = projectDirectoryPath + @"Assets\TestInputData\TestCsvItemListInput.csv";
-            string testXmlFilePath = projectDirectoryPath + @"Assets\TestInputData\TestXmlItemLitInput.xml";
             string testDeliveryDirectoryPath = projectDirectoryPath + @"Assets\TestInputData\TestDeliveryFolder";
 
             //Initializing values:
@@ -21,15 +20,13 @@ namespace ConsoleLogicTesting
 
             List<string> csvImport = filevalidation.Deliverables.FileNameList;
 
-            List<string> allFilenames = filevalidation.DeliveryDirectory.AllFileNamesInDirectory;
+            List<string> allFilenames = filevalidation.DeliveryDirectory.GetAllFileNames();
 
-            List<string> allFilePaths = filevalidation.DeliveryDirectory.AllFilePathsInDirectory;
+            List<string> allFilePaths = filevalidation.DeliveryDirectory.GetAllFilePaths();
 
-            List<string> extraFilenames = filevalidation.GetAllExtraFileNamesNotIncludedInDelivery(
-                filevalidation.Deliverables.FileNameList, filevalidation.DeliveryDirectory);
+            List<string> extraFilenames = filevalidation.DeliveryDirectory.GetAllFilesNotInDeliverables();
 
-            List<string> missingFileNames = filevalidation.GetAllMissingFileNames(
-                filevalidation.Deliverables.FileNameList, filevalidation.DeliveryDirectory);
+            List<string> missingFileNames = filevalidation.GetAllMissingFileNames();
 
             //Listing all values:
 
@@ -63,11 +60,12 @@ namespace ConsoleLogicTesting
                 Console.WriteLine("    -" + fileName);
             }
 
-            Console.WriteLine("\nTesting export of csv:");
-            DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\");
+            Console.WriteLine("\nTesting edit of csv:");
+            DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\TestCsvExport.csv");
+            Console.WriteLine("Csv edited.");
 
             Console.WriteLine("\nTesting XML export:");
-            DeliveryDocExporter.ExportXml(filevalidation);
+            DeliveryDocExporter.ExportXML(filevalidation, $@"{projectDirectoryPath}Exports\TestXmlExport.xml");
         }
     }
 }
