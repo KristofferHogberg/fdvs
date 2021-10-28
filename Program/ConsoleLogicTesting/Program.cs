@@ -13,6 +13,7 @@ namespace ConsoleLogicTesting
             string projectDirectoryPath = 
                 Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().Length - 44);
             string testCsvFilePath = projectDirectoryPath + @"Assets\TestInputData\TestCsvItemListInput.csv";
+            string testXmlFilePath = projectDirectoryPath + @"Assets\TestInputData\TestXmlItemLitInput.xml";
             string testDeliveryDirectoryPath = projectDirectoryPath + @"Assets\TestInputData\TestDeliveryFolder";
 
             //Initializing values:
@@ -64,6 +65,9 @@ namespace ConsoleLogicTesting
 
             Console.WriteLine("\nTesting export of csv:");
             DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\");
+
+            Console.WriteLine("\nTesting XML export:");
+            DeliveryDocExporter.ExportXml(filevalidation);
         }
     }
 }
