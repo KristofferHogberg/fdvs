@@ -6,29 +6,32 @@ using System.Linq;
 namespace fdvs
 {
     /// <summary>
-    /// Contains information about all files in the directory tree.
+    /// Instantiates a new collection of all files in the delivery directory tree.
     /// </summary>
     public class DeliveryDirectoryModel
     {
-        public string DirectoryPath { get; set; }
-        public string DirectoryName { get; set; }
-        private List<FileInfo> AllFilesInDeliveryFolder { get; } = new List<FileInfo>();
+        private string DirectoryPath { get; set; }
+        private string DirectoryName { get; set; }
         public List<DeliveryFile> DeliveryFiles { get; set; } = new List<DeliveryFile>();
 
         public DeliveryDirectoryModel(string directoryPath)
         {
             DirectoryPath = directoryPath;
             DirectoryName = new DirectoryInfo(directoryPath).Name;
-            AllFilesInDeliveryFolder = GetAllFileInfoFromDirectoryTree(DirectoryPath);
-            DeliveryFiles = GenerateDeliveryFilesObjects(AllFilesInDeliveryFolder);
+            DeliveryFiles = GenerateDeliveryFilesObjects();
         }
 
-        private List<DeliveryFile> GenerateDeliveryFilesObjects(
-            List<FileInfo> allFilesInDeliveryFolder)
+        /// <summary>
+        /// Returns a list of DeliveryFile objects of all files in the delivery directory.
+        /// </summary>
+        /// <param name="allFilesInDeliveryFolder"></param>
+        /// <returns></returns>
+        private List<DeliveryFile> GenerateDeliveryFilesObjects()
         {
             var output = new List<DeliveryFile>();
+            var fileInfoOfAllFilesInDirectory = GetAllFileInfoFromDirectoryTree(DirectoryPath);
 
-            foreach (var file in allFilesInDeliveryFolder)
+            foreach (var file in fileInfoOfAllFilesInDirectory)
             {
                 output.Add(new DeliveryFile(file, DirectoryName));
             }
