@@ -1,15 +1,16 @@
-﻿using System;
+﻿using fdvs.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace fdvs
+namespace fdvs.DataAccess
 {
     public static class XmlFormatter
     {
-        public static XElement DeliveryFileToXElement(DeliveryFile file)
+        public static XElement DeliveryFileToXElement(DeliveryFileModel file)
         {
             var fileRoot = new XElement("File");
 

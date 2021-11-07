@@ -1,11 +1,13 @@
-﻿using System;
+﻿using fdvs.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace fdvs
 {
     /// <summary>
-    /// Contains methods for validating and comparing files.
+    /// The main entry for the program logic and filehandling.
+    /// Encapsulates information regarding files that exist within a root folder Contains methods for validating and comparing files.
     /// </summary>
     public class FileValidation
     {
@@ -30,8 +32,17 @@ namespace fdvs
             return missingFiles;
         }
 
+        /// <summary>
+        /// Returns a list of the filepaths of each file which exist within the root directory that are . 
+        /// </summary>
+        /// <returns>Example: "rootfolder\subfolder\textfile.txt"</returns>
+        public List<string> GetAllFilesNotInDeliverables()
+        {
+            return DeliveryDirectory.DeliveryFiles.Where(x => x.InDeliverables == false).Select(x => x.FileName).ToList();
+        }
+
         private void UpdateIfFilesInDeliveryFolderIsInDeliverables(
-            List<string> deliverables, List<DeliveryFile> deliveryFiles)
+            List<string> deliverables, List<DeliveryFileModel> deliveryFiles)
         {
             foreach (var file in deliveryFiles)
             {

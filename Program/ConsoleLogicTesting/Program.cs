@@ -24,7 +24,7 @@ namespace ConsoleLogicTesting
 
             List<string> allFilePaths = filevalidation.DeliveryDirectory.GetAllFilePaths();
 
-            List<string> extraFilenames = filevalidation.DeliveryDirectory.GetAllFilesNotInDeliverables();
+            List<string> extraFilenames = filevalidation.GetAllFilesNotInDeliverables();
 
             List<string> missingFileNames = filevalidation.GetAllMissingFileNames();
 
@@ -60,12 +60,12 @@ namespace ConsoleLogicTesting
                 Console.WriteLine("    -" + fileName);
             }
 
-            Console.WriteLine("\nTesting edit of csv:");
-            DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\TestCsvExport.csv");
-            Console.WriteLine("Csv edited.");
+            //Console.WriteLine("\nTesting edit of csv:");
+            //DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\TestCsvExport.csv");
+            //Console.WriteLine("Csv edited.");
 
-            Console.WriteLine("\nTesting XML export:");
-            DeliveryDocExporter.ExportXML(filevalidation, $@"{projectDirectoryPath}Exports\TestXmlExport.xml");
+            //Console.WriteLine("\nTesting XML export:");
+            //DeliveryDocExporter.ExportXML(filevalidation, $@"{projectDirectoryPath}Exports\TestXmlExport.xml");
         }
     }
 }

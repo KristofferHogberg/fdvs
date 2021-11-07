@@ -4,12 +4,12 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml;
-using static fdvs.XmlFormatter;
+using fdvs.DataAccess;
+using fdvs.Models;
 
-namespace fdvs
+namespace fdvs.DataAccess
 {
     public static class DeliveryDocExporter
     {
@@ -26,7 +26,7 @@ namespace fdvs
             return csvFormat;
         }
 
-        private static string GenerateCsvStringOfRows(List<DeliveryFile> files, string columns)
+        private static string GenerateCsvStringOfRows(List<DeliveryFileModel> files, string columns)
         {
             //TODO - Generate Rows() should be a private method?
             //Looping through all files and filepaths and adding them together.
@@ -59,17 +59,17 @@ namespace fdvs
 
             var missingFiles = new XElement("MissingFiles", fileValidation
                 .GetAllMissingFileNames()
-                .Select(fileName => FileNameToXElement(fileName)));
+                .Select(fileName => XmlFormatter.FileNameToXElement(fileName)));
 
             var extraFiles = new XElement("ExtraFiles", fileValidation
                 .AllExtraFileNamesInDirectory
-                .Select(fileName => FileNameToXElement(fileName)));
+                .Select(fileName => XmlFormatter.FileNameToXElement(fileName)));
 
             var matchingFiles = new XElement("MatchingFiles", files
                 .Where(file => !fileValidation
                     .GetAllMissingFileNames()
                         .Contains(file.FileName))
-                .Select(file => DeliveryFileToXElement(file)));
+                .Select(file => XmlFormatter.DeliveryFileToXElement(file)));
 
             var doc = new XDocument(new XElement("Root"));
             doc.Root.Add(new XComment("Expected files that were missing."));
@@ -101,29 +101,5 @@ namespace fdvs
 
                 xml.Save(xw);
         }
-
-        ///// <summary>
-        ///// Placeholder test class
-        ///// </summary>
-        //[Serializable]
-        //private class DeliveryFile
-        //{
-        //    public string FileName { get; }
-        //    public string FilePath { get; }
-        //    public bool InDeliverables { get; set; }
-
-        //    public DeliveryFile(string fileName, string filePath)
-        //    {
-        //        FileName = fileName;
-        //        FilePath = filePath;
-        //    }
-        //}
-        //public static void ExportXml(FileValidation fileValidation, string filePath)
-        //{
-        //    using (XmlWriter writer = XmlWriter.Create())
-        //}
-        //TODO - Create .xlsx exporter
-
-        //TODO - Create .xml exporter
     }
 }

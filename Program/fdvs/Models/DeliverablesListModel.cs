@@ -1,12 +1,13 @@
-﻿using System;
+﻿using fdvs.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace fdvs
+namespace fdvs.Models
 {
     /// <summary>
-    /// Contains the list with all requested files that should be included with
-    /// the delivery.
+    /// Model containing the list of all requested filenames, incl file extension,
+    /// that are to be part of the delivery.
     /// At this point in time, .csv is the only
     /// supported format for import.
     /// </summary>
@@ -23,9 +24,9 @@ namespace fdvs
         /// which it then reads and parse to a list of string literals.
         /// </summary>
         /// <param name="filePath">Filepath to .csv file.</param>
-        public DeliverablesListModel(string filePath)
+        public DeliverablesListModel(string filePathToCsvFile)
         {
-            FileNameList = FileParser.CsvParser(filePath);
+            FileNameList = FileParser.CsvParser(filePathToCsvFile);
         }
     }
 }
