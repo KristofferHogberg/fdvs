@@ -11,54 +11,33 @@ namespace ConsoleLogicTesting
         {
             //Getting project directory path to access test data
             string projectDirectoryPath = 
-                Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().Length - 44);
-            string testCsvFilePath = projectDirectoryPath + @"Assets\TestInputData\TestCsvItemListInput.csv";
-            string testDeliveryDirectoryPath = projectDirectoryPath + @"Assets\TestInputData\TestDeliveryFolder";
+                Directory.GetCurrentDirectory()
+                .Substring(0, Directory.GetCurrentDirectory().Length - 44);
+            string testCsvFilePath = 
+                projectDirectoryPath + @"Assets\TestInputData\TestCsvItemListInput.csv";
+            string testDeliveryDirectoryPath = 
+                projectDirectoryPath + @"Assets\TestInputData\TestDeliveryFolder";
 
             //Initializing values:
-            FileValidationProgram filevalidation = new FileValidationProgram(testCsvFilePath, testDeliveryDirectoryPath);
-
-            List<string> csvImport = filevalidation.Deliverables.FileNameList;
-
-            List<string> allFilenames = filevalidation.DeliveryDirectory.GetAllFileNames();
-
-            List<string> allFilePaths = filevalidation.DeliveryDirectory.GetAllFilePaths();
-
-            List<string> extraFilenames = filevalidation.GetAllUnexpectedFiles();
-
-            List<string> missingFileNames = filevalidation.GetAllMissingFileNames();
+            FileValidationProgram filevalidation = 
+                new FileValidationProgram(testCsvFilePath, testDeliveryDirectoryPath);
 
             //Listing all values:
 
-            Console.WriteLine(".csv import:");
-            foreach (var fileName in csvImport)
-            {
-                Console.WriteLine("    -" + fileName);
-            }
+            WriteLineEachString("Deliverables from .csv import:", 
+                filevalidation.Deliverables.FileNameList);
 
-            Console.WriteLine("\nAll files in delivery directory:");
-            foreach (var fileName in allFilenames)
-            {
-                Console.WriteLine("    -" + fileName);
-            }
+            WriteLineEachString("All files in delivery directory:", 
+                filevalidation.DeliveryDirectory.GetAllFileNames());
 
-            Console.WriteLine("\nFile paths in delivery directory:");
-            foreach (var filePath in allFilePaths)
-            {
-                Console.WriteLine("    -" + filePath);
-            }
+            WriteLineEachString("File paths in delivery directory:", 
+                filevalidation.DeliveryDirectory.GetAllFilePaths());
 
-            Console.WriteLine("\nExtra files in delivery directory (not mentioned in .csv):");
-            foreach (var fileName in extraFilenames)
-            {
-                Console.WriteLine("    -" + fileName);
-            }
+            WriteLineEachString("Extra files in delivery directory (not mentioned in .csv):", 
+                filevalidation.GetAllUnexpectedFiles());
 
-            Console.WriteLine("\nMissing files in delivery directory:");
-            foreach (var fileName in missingFileNames)
-            {
-                Console.WriteLine("    -" + fileName);
-            }
+            WriteLineEachString("Missing files in delivery directory:", 
+                filevalidation.GetAllMissingFileNames());
 
             //Console.WriteLine("\nTesting edit of csv:");
             //DeliveryDocExporter.ExportCsv(filevalidation, $@"{projectDirectoryPath}Exports\TestCsvExport.csv");
@@ -66,6 +45,16 @@ namespace ConsoleLogicTesting
 
             //Console.WriteLine("\nTesting XML export:");
             //DeliveryDocExporter.ExportXML(filevalidation, $@"{projectDirectoryPath}Exports\TestXmlExport.xml");
+        }
+
+        private static void WriteLineEachString(string message, List<string> collection)
+        {
+            Console.WriteLine(message);
+            foreach (var item in collection)
+            {
+                Console.WriteLine("    -" + item);
+            }
+            Console.WriteLine();
         }
     }
 }

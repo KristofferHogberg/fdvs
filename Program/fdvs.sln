@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fdvs", "fdvs\fdvs.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleLogicTesting", "ConsoleLogicTesting\ConsoleLogicTesting.csproj", "{EA7343FF-C1E8-4E60-9FFC-001A944CA51F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fdvsTests", "fdvsTests\fdvsTests.csproj", "{870E2F02-76B8-4171-99C8-D8AE943AC662}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EA7343FF-C1E8-4E60-9FFC-001A944CA51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA7343FF-C1E8-4E60-9FFC-001A944CA51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA7343FF-C1E8-4E60-9FFC-001A944CA51F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{870E2F02-76B8-4171-99C8-D8AE943AC662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{870E2F02-76B8-4171-99C8-D8AE943AC662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{870E2F02-76B8-4171-99C8-D8AE943AC662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{870E2F02-76B8-4171-99C8-D8AE943AC662}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
