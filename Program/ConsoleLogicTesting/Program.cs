@@ -16,7 +16,7 @@ namespace ConsoleLogicTesting
             string testDeliveryDirectoryPath = projectDirectoryPath + @"Assets\TestInputData\TestDeliveryFolder";
 
             //Initializing values:
-            FileValidation filevalidation = new FileValidation(testCsvFilePath, testDeliveryDirectoryPath);
+            FileValidationProgram filevalidation = new FileValidationProgram(testCsvFilePath, testDeliveryDirectoryPath);
 
             List<string> csvImport = filevalidation.Deliverables.FileNameList;
 

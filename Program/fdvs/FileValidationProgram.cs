@@ -7,19 +7,39 @@ namespace fdvs
 {
     /// <summary>
     /// The main entry for the program logic and filehandling.
-    /// Encapsulates information regarding files that exist within a root folder Contains methods for validating and comparing files.
+    /// Encapsulates information regarding files which exist within a root folder. 
+    /// Contains methods for and comparing files, exporting of files and other.
     /// </summary>
-    public class FileValidation
+    public class FileValidationProgram
     {
         public DeliverablesListModel Deliverables { get; set; }
         public DeliveryDirectoryModel DeliveryDirectory { get; set; }
         public List<string> AllExtraFileNamesInDirectory { get; set; } = new List<string>();
         public List<string> AllMissingFileNames { get; set; } = new List<string>();
 
-        public FileValidation(string filePathToCsv, 
-            string filePathToDeliveryDirectory)
+        //TODO - tests för att kolla om Deliverables är null.
+
+        /// <summary>
+        /// Constructor for when there is no itemized .csv file of the deliverables which are to 
+        /// be included with the delivery.
+        /// </summary>
+        /// <param name="filePathToCsv"></param>
+        /// <param name="filePathToDeliveryDirectory"></param>
+        public FileValidationProgram(string filePathToDeliveryDirectory)
         {
-            Deliverables = new DeliverablesListModel(filePathToCsv);
+            DeliveryDirectory = new DeliveryDirectoryModel(filePathToDeliveryDirectory);
+            UpdateIfFilesInDeliveryFolderIsInDeliverables(
+                Deliverables.FileNameList, DeliveryDirectory.DeliveryFiles);
+        }
+
+        /// <summary>
+        /// Constructor for when a csv-file exists of the deliverables for a delivery.
+        /// </summary>
+        /// <param name="filePathToDeliverablesCsvFile"></param>
+        /// <param name="filePathToDeliveryDirectory"></param>
+        public FileValidationProgram(string filePathToDeliveryDirectory, string filePathToDeliverablesCsvFile)
+        {
+            Deliverables = new DeliverablesListModel(filePathToDeliverablesCsvFile);
             DeliveryDirectory = new DeliveryDirectoryModel(filePathToDeliveryDirectory);
             UpdateIfFilesInDeliveryFolderIsInDeliverables(
                 Deliverables.FileNameList, DeliveryDirectory.DeliveryFiles);
@@ -41,12 +61,18 @@ namespace fdvs
             return DeliveryDirectory.DeliveryFiles.Where(x => x.InDeliverables == false).Select(x => x.FileName).ToList();
         }
 
+        /// <summary>
+        /// Goes through each DeliveryFileModel in a collection and checks whether or not 
+        /// the filename is present in the collection of deliverables.
+        /// </summary>
+        /// <param name="filenamesThatAreToBeDelivered"></param>
+        /// <param name="deliveryFiles"></param>
         private void UpdateIfFilesInDeliveryFolderIsInDeliverables(
-            List<string> deliverables, List<DeliveryFileModel> deliveryFiles)
+            List<string> filenamesThatAreToBeDelivered, List<DeliveryFileModel> deliveryFiles)
         {
             foreach (var file in deliveryFiles)
             {
-                if (deliverables.Contains(file.FileName))
+                if (filenamesThatAreToBeDelivered.Contains(file.FileName))
                 {
                     file.InDeliverables = true;
                 }

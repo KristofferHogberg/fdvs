@@ -11,11 +11,14 @@ using fdvs.Models;
 
 namespace fdvs.DataAccess
 {
+    /// <summary>
+    /// Contains methods for exporting information regarding the files which exists within the delivery folder.
+    /// </summary>
     public static class DeliveryDocExporter
     {
         //TODO - Create support for column "Files not mentioned in provided list of deliverables:"
         //Needs to alter methods for GenerateCsvStringOfRows() (currently takes one overload)
-        private static string GenerateCsvString(FileValidation fileValidation)
+        private static string GenerateCsvString(FileValidationProgram fileValidation)
         {
             //Needs to manually add columns below. NOT SCALEABLE.
             string columns = "All files:,File paths:,Files not mentioned in provided list of deliverables:";
@@ -42,7 +45,7 @@ namespace fdvs.DataAccess
 
         //TODO - Create .csv exporter that actually creates a csv, instead of altering an existing one.
 
-        public static void ExportCsv(FileValidation fileValidation, string filePath)
+        public static void ExportCsv(FileValidationProgram fileValidation, string filePath)
         {
             var csvString = GenerateCsvString(fileValidation);
             File.WriteAllText(filePath, csvString, Encoding.UTF8);
@@ -53,7 +56,7 @@ namespace fdvs.DataAccess
         /// </summary>
         /// <param name="fileValidation"></param>
         /// <returns></returns>
-        private static XDocument GenerateXML(FileValidation fileValidation)
+        private static XDocument GenerateXML(FileValidationProgram fileValidation)
         {
             var files = fileValidation.DeliveryDirectory.DeliveryFiles;
 
@@ -82,7 +85,7 @@ namespace fdvs.DataAccess
             return doc;
         }
 
-        public static void ExportXML(FileValidation fileValidation, string filePath)
+        public static void ExportXML(FileValidationProgram fileValidation, string filePath)
         {
             var xml = GenerateXML(fileValidation);
 

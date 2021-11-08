@@ -6,7 +6,7 @@ namespace fdvs.Models
 {
     /// <summary>
     /// Model containing information about all of the files which exist within a root directory and its subdirectories.
-    /// Each files information is stored in a DeliveryFile object which is encapsulated by a list property
+    /// Each files information is stored in a DeliveryFile object which in turn is encapsulated in a list property
     /// named DeliveryFiles.
     /// </summary>
     public class DeliveryDirectoryModel
