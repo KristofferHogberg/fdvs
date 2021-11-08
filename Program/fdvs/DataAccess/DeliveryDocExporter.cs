@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.Xml;
-using fdvs.DataAccess;
 using fdvs.Models;
 
 namespace fdvs.DataAccess
@@ -44,6 +43,7 @@ namespace fdvs.DataAccess
 
 
         //TODO - Create .csv exporter that actually creates a csv, instead of altering an existing one.
+        //Borde inte vara så svårt väl?
 
         public static void ExportCsv(FileValidationProgram fileValidation, string filePath)
         {
@@ -65,7 +65,7 @@ namespace fdvs.DataAccess
                 .Select(fileName => XmlFormatter.FileNameToXElement(fileName)));
 
             var extraFiles = new XElement("ExtraFiles", fileValidation
-                .AllExtraFileNamesInDirectory
+                .GetAllUnexpectedFiles()
                 .Select(fileName => XmlFormatter.FileNameToXElement(fileName)));
 
             var matchingFiles = new XElement("MatchingFiles", files

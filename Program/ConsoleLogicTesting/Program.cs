@@ -24,7 +24,7 @@ namespace ConsoleLogicTesting
 
             List<string> allFilePaths = filevalidation.DeliveryDirectory.GetAllFilePaths();
 
-            List<string> extraFilenames = filevalidation.GetAllFilesNotInDeliverables();
+            List<string> extraFilenames = filevalidation.GetAllUnexpectedFiles();
 
             List<string> missingFileNames = filevalidation.GetAllMissingFileNames();
 

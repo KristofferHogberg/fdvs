@@ -14,8 +14,6 @@ namespace fdvs
     {
         public DeliverablesListModel Deliverables { get; set; }
         public DeliveryDirectoryModel DeliveryDirectory { get; set; }
-        public List<string> AllExtraFileNamesInDirectory { get; set; } = new List<string>();
-        public List<string> AllMissingFileNames { get; set; } = new List<string>();
 
         //TODO - tests för att kolla om Deliverables är null.
 
@@ -37,7 +35,7 @@ namespace fdvs
         /// </summary>
         /// <param name="filePathToDeliverablesCsvFile"></param>
         /// <param name="filePathToDeliveryDirectory"></param>
-        public FileValidationProgram(string filePathToDeliveryDirectory, string filePathToDeliverablesCsvFile)
+        public FileValidationProgram(string filePathToDeliverablesCsvFile, string filePathToDeliveryDirectory)
         {
             Deliverables = new DeliverablesListModel(filePathToDeliverablesCsvFile);
             DeliveryDirectory = new DeliveryDirectoryModel(filePathToDeliveryDirectory);
@@ -45,20 +43,35 @@ namespace fdvs
                 Deliverables.FileNameList, DeliveryDirectory.DeliveryFiles);
         }
 
+        /// <summary>
+        /// Gets a list of strings of all filenames which are listed to be part of the delivery
+        /// (deliverables), yet are not found in the directory containing the delivery files.
+        /// </summary>
+        /// <returns>A list of filenames as string literals.</returns>
         public List<string> GetAllMissingFileNames()
         {
-            var filesInDeliveryDirectories = DeliveryDirectory.DeliveryFiles.Select(x => x.FileName).ToList();
-            var missingFiles = Deliverables.FileNameList.Where(x => !filesInDeliveryDirectories.Contains(x)).Select(x => x).ToList();
+            var filesInDeliveryDirectories = DeliveryDirectory.DeliveryFiles
+                .Select(x => x.FileName)
+                .ToList();
+            var missingFiles = Deliverables.FileNameList
+                .Where(x => !filesInDeliveryDirectories.Contains(x))
+                .Select(x => x)
+                .ToList();
             return missingFiles;
         }
 
         /// <summary>
-        /// Returns a list of the filepaths of each file which exist within the root directory that are . 
+        /// Gets a list of the filepaths of each file which exist within the root directory that 
+        /// are not mentioned in any deliverables documentation. 
         /// </summary>
-        /// <returns>Example: "rootfolder\subfolder\textfile.txt"</returns>
-        public List<string> GetAllFilesNotInDeliverables()
+        /// <returns>A list of string literals in the following example format: 
+        /// "rootfolder\subfolder\textfile.txt"</returns>
+        public List<string> GetAllUnexpectedFiles()
         {
-            return DeliveryDirectory.DeliveryFiles.Where(x => x.InDeliverables == false).Select(x => x.FileName).ToList();
+            return DeliveryDirectory.DeliveryFiles
+                .Where(x => x.InDeliverables == false)
+                .Select(x => x.FileName)
+                .ToList();
         }
 
         /// <summary>

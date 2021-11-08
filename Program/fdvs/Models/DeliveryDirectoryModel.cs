@@ -64,7 +64,9 @@ namespace fdvs.Models
         /// <returns>A list of all filenames which exist within the root directory. Example: "textfile.txt"</returns>
         public List<string> GetAllFileNames()
         {
-            return DeliveryFiles.Select(x => x.FileName).ToList();
+            return DeliveryFiles
+                .Select(x => x.FileName)
+                .ToList();
         }
 
         /// <summary>
@@ -73,7 +75,9 @@ namespace fdvs.Models
         /// <returns>Example: "rootfolder\subdirectory\textfile.txt"</returns>
         public List<string> GetAllFilePaths()
         {
-            return DeliveryFiles.Select(x => x.FilePath).ToList();
+            return DeliveryFiles
+                .Select(x => x.FilePath)
+                .ToList();
         }
     }
 }
