@@ -1,17 +1,19 @@
-﻿using System;
+﻿using fdvs.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace fdvsClassLibrary.Models
+namespace fdvs.Models
 {
     /// <summary>
-    /// Contains the list with all requested.
+    /// Model containing the list of all requested filenames, incl file extension,
+    /// that are to be part of the delivery.
     /// At this point in time, .csv is the only
     /// supported format for import.
     /// </summary>
-    class ItemListModel
+    public class DeliverablesListModel
     {
-        public List<string> ItemList { get; set; } = new List<string>();
+        public List<string> FileNameList { get; set; } = new List<string>();
 
         //TODO - Should refactor so that the constructor takes a
         //stringlist with the filenames, and create parsers for
@@ -21,17 +23,10 @@ namespace fdvsClassLibrary.Models
         /// The constructor currently accepts a filepath to a .csv, 
         /// which it then reads and parse to a list of string literals.
         /// </summary>
-        /// <param name="filePath"></param>
-        ItemListModel(string filePath)
+        /// <param name="filePath">Filepath to .csv file.</param>
+        public DeliverablesListModel(string filePathToCsvFile)
         {
-            using (var reader = new StreamReader(filePath))
-            {
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    ItemList.Add(line.Trim());
-                }
-            }
+            FileNameList = FileParser.CsvParser(filePathToCsvFile);
         }
     }
 }

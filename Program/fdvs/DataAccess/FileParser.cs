@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace fdvs
+namespace fdvs.DataAccess
 {
     /// <summary>
     /// Contains methods for parsing different types of datastreams, such as .csv, .xml, or .xlsx.
@@ -29,9 +29,5 @@ namespace fdvs
         }
 
         //TODO - Create a file parser for excel files
-        //public static List<string> XlxsParser(string filePath)
-        //{
-
-        //}
     }
 }
