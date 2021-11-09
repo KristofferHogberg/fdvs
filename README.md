@@ -1,6 +1,5 @@
 # File Delivery Validation System
-File Delivery Validation System (FDVS) is an open source software designed to aid with large scale file deliveries.
-The purpose of the software is to validate the content of a folder meant for delivery by checking if the files requested by an item list exists within the delivery folder structure.
+File Delivery Validation System (FDVS) is an open source tool designed to aid with large scale file deliveries by autogenerating delivery documentation of a specific delivery folder. If an itemized order list of deliverables exists the program can also cross reference the contents of the delivery folder with the list to ensure that all expected files exists within the folder and its subfolders.
 
 **CONCEPTUAL STEPS:**
 
