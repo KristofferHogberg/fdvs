@@ -20,7 +20,8 @@ namespace fdvsTests
         public void GetAllMissingFileNames_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var fileValidationProgram = new FileValidationProgram(testCsvFilePath, testDeliveryDirectoryPath);
+            var fileValidationProgram = new FileValidationProgram(
+                testCsvFilePath, testDeliveryDirectoryPath);
 
             // Act
             var result = fileValidationProgram.GetAllMissingFileNames();
@@ -34,7 +35,8 @@ namespace fdvsTests
         public void GetAllUnexpectedFiles_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var fileValidationProgram = new FileValidationProgram(testCsvFilePath, testDeliveryDirectoryPath);
+            var fileValidationProgram = new FileValidationProgram(
+                testCsvFilePath, testDeliveryDirectoryPath);
 
             // Act
             var result = fileValidationProgram.GetAllUnexpectedFiles();

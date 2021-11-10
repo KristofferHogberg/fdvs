@@ -1,6 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using fdvs.DataAccess;
+﻿using fdvs.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace fdvsTests.DataAccess
 {
@@ -11,11 +10,10 @@ namespace fdvsTests.DataAccess
         public void CsvParser_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var fileParser = new FileParser();
             string filePath = null;
 
             // Act
-            var result = fileParser.CsvParser(
+            var result = FileParser.CsvParser(
                 filePath);
 
             // Assert

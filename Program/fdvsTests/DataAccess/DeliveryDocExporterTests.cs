@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using fdvs;
 using fdvs.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace fdvsTests.DataAccess
 {
@@ -11,12 +11,11 @@ namespace fdvsTests.DataAccess
         public void ExportCsv_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var deliveryDocExporter = new DeliveryDocExporter();
             FileValidationProgram fileValidation = null;
             string filePath = null;
 
             // Act
-            deliveryDocExporter.ExportCsv(
+            DeliveryDocExporter.ExportCsv(
                 fileValidation,
                 filePath);
 
@@ -28,12 +27,11 @@ namespace fdvsTests.DataAccess
         public void ExportXML_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var deliveryDocExporter = new DeliveryDocExporter();
             FileValidationProgram fileValidation = null;
             string filePath = null;
 
             // Act
-            deliveryDocExporter.ExportXML(
+            DeliveryDocExporter.ExportXML(
                 fileValidation,
                 filePath);
 

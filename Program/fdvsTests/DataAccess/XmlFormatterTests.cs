@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using fdvs.DataAccess;
+﻿using fdvs.DataAccess;
+using fdvs.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace fdvsTests.DataAccess
 {
@@ -11,11 +11,10 @@ namespace fdvsTests.DataAccess
         public void DeliveryFileToXElement_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var xmlFormatter = new XmlFormatter();
             DeliveryFileModel file = null;
 
             // Act
-            var result = xmlFormatter.DeliveryFileToXElement(
+            var result = XmlFormatter.DeliveryFileToXElement(
                 file);
 
             // Assert
@@ -26,11 +25,10 @@ namespace fdvsTests.DataAccess
         public void FileNameToXElement_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var xmlFormatter = new XmlFormatter();
             string fileName = null;
 
             // Act
-            var result = xmlFormatter.FileNameToXElement(
+            var result = XmlFormatter.FileNameToXElement(
                 fileName);
 
             // Assert

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace fdvs.DataAccess
@@ -7,7 +6,7 @@ namespace fdvs.DataAccess
     /// <summary>
     /// Contains methods for parsing different types of datastreams, such as .csv, .xml, or .xlsx.
     /// </summary>
-    static class FileParser
+    public static class FileParser
     {
         /// <summary>
         /// Reads a single column csv and returns a list of strings.

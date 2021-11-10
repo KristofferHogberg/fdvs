@@ -1,8 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using fdvs;
-using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using fdvs.Models;
+using System.IO;
 
 namespace fdvsTests
 {
@@ -22,7 +21,8 @@ namespace fdvsTests
             string testDeliveryDirectoryPath =
                 projectDirectoryPath + @"Assets\TestInputData\TestDeliveryFolder";
 
-            var filevalidation = new FileValidationProgram(testCsvFilePath, testDeliveryDirectoryPath);
+            var filevalidation = new FileValidationProgram(
+                testCsvFilePath, testDeliveryDirectoryPath);
             var actual = filevalidation.GetAllMissingFileNames();
             var expected = new List<string>() { "file6.txt" };
             CollectionAssert.AreEqual(expected, actual);
@@ -36,7 +36,8 @@ namespace fdvsTests
             string testDeliveryDirectoryPath =
                 projectDirectoryPath + @"Assets\TestInputData\TestDeliveryFolder";
 
-            var filevalidation = new FileValidationProgram(testCsvFilePath, testDeliveryDirectoryPath);
+            var filevalidation = new FileValidationProgram(
+                testCsvFilePath, testDeliveryDirectoryPath);
             var actual = filevalidation.GetAllUnexpectedFiles();
             var expected = new List<string>() { "file6_incorrectlyNamed.txt" };
             CollectionAssert.AreEqual(expected, actual);
