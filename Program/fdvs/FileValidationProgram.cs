@@ -14,8 +14,6 @@ namespace fdvs
         public DeliverablesListModel Deliverables { get; set; }
         public DeliveryDirectoryModel DeliveryDirectory { get; set; }
 
-        //TODO - tests för att kolla om Deliverables är null.
-
         /// <summary>
         /// Constructor for when there is no itemized .csv file of the deliverables which are to 
         /// be included with the delivery.
